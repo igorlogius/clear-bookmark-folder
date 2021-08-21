@@ -1,0 +1,18 @@
+{
+  "author": "igorlogius",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "description": "add context menu to bookmark folder to remove all entries",
+  "icons": {
+  },
+  "manifest_version": 2,
+  "name": "clear-bookmark-folder",
+  "permissions": [
+    "menus",
+    "bookmarks"
+  ],
+  "version": "1.0.0"
+}

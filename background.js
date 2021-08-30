@@ -18,6 +18,7 @@ browser.menus.create({
 	id: extname,
 	title: "Remove Children",
 	contexts: ["bookmark"],
+	visible: false,
 	onclick: function(info, tab) {
 		if(info.bookmarkId){
 			removeChildren(info.bookmarkId); 
@@ -25,3 +26,15 @@ browser.menus.create({
 	}
 });
 
+
+browser.menus.onShown.addListener(async function(info, tab) {
+	if(info.bookmarkId ) {
+		children = (await browser.bookmarks.getChildren(info.bookmarkId)).filter( child => child.url).map( child => child.url);
+		if(Array.isArray(children) && children.length > 0) {
+			browser.menus.update(extname, {visible: true});
+		}else{
+			browser.menus.update(extname, {visible: false});
+		}
+	}
+	browser.menus.refresh();
+});

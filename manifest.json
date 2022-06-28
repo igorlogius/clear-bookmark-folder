@@ -9,10 +9,10 @@
   "icons": {
   },
   "manifest_version": 2,
-  "name": "clear-bookmark-folder",
+  "name": "Clear Bookmark Folder",
   "permissions": [
     "menus",
     "bookmarks"
   ],
-  "version": "1.0.2"
+  "version": "1.0.3"
 }

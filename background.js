@@ -1,3 +1,5 @@
+/* global browser */
+
 //const temporary = browser.runtime.id.endsWith('@temporary-addon'); // debugging?
 const manifest = browser.runtime.getManifest();
 const extname = manifest.name;
@@ -19,17 +21,17 @@ browser.menus.create({
 	title: "Remove Children",
 	contexts: ["bookmark"],
 	visible: false,
-	onclick: function(info, tab) {
+	onclick: function(info/*, tab*/) {
 		if(info.bookmarkId){
-			removeChildren(info.bookmarkId); 
+			removeChildren(info.bookmarkId);
 		}
 	}
 });
 
 
-browser.menus.onShown.addListener(async function(info, tab) {
+browser.menus.onShown.addListener(async function(info/*, tab*/) {
 	if(info.bookmarkId ) {
-		children = (await browser.bookmarks.getChildren(info.bookmarkId)).filter( child => child.url).map( child => child.url);
+		const children = (await browser.bookmarks.getChildren(info.bookmarkId)).filter( child => child.url).map( child => child.url);
 		if(Array.isArray(children) && children.length > 0) {
 			browser.menus.update(extname, {visible: true});
 		}else{
